@@ -3,6 +3,7 @@ import { SearchComponent, FooterComponent, ListActorsComponent, CardActorCompone
 import { ApiService } from '../../core';
 import { HttpParams } from '@angular/common/http';
 import { Actors } from '../../core/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ import { Actors } from '../../core/interfaces';
 export class HomeComponent {
 
   private apiService = inject( ApiService );
+  private router = inject( Router );
 
   public actorA = signal<Actors | undefined>(undefined);
   public actorB = signal<Actors | undefined>(undefined);
@@ -62,7 +64,7 @@ export class HomeComponent {
   }
 
   public gameStart() {
-    
+    this.router.navigateByUrl('/game');
   }
 
 }

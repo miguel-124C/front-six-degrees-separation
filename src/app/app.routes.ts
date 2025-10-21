@@ -4,7 +4,10 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: ()=> import('./pages/home/home.component').then( c => c.HomeComponent)
-  }, {
+  },{
+    path: 'game',
+    loadComponent: ()=> import('./pages/game/game.component').then( c => c.GameComponent)
+  },{
     path: 'login',
     loadComponent: ()=> import('./pages/login/login.component').then( c => c.LoginComponent)
   }, {

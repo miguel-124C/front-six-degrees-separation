@@ -1,0 +1,55 @@
+<div class="min-h-full">
+  <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-white">Welcome to Kevin Bacon Game</h1>
+    </div>
+  </header>
+  <main class="min-h-full mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <section>
+      <div>
+        <h2 class="text-2xl text-white font-bold">¿En que consiste el juego?</h2>
+        <br>
+        <p class="text-white text-xl">
+          Conectar dos actores cualquiera (Actor A y Actor B) a través de una cadena de compañeros de reparto, en la menor cantidad de clics posible.
+        </p>
+      </div>
+    </section>
+
+    <hr class="my-8 text-white">
+
+    <section class="grid grid-cols-2 w-full gap-4">
+      <div>
+        <label for="first-actor" class="text-white">Actor A</label>
+        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == 'B' || actorsSelected()" />
+      </div>
+      <div>
+        <label for="second-actor" class="text-white">Actor B</label>
+        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == 'A' || actorsSelected()" />
+      </div>
+    </section>
+
+    <app-list-actors [actors]="listActors()"
+      (onSelectActor)="selectActor($event, turnActor)" />
+
+    @if (actorsSelected()) {
+      <section>
+        <div class="flex gap-2 flex-wrap justify-between items-center">
+          <app-card-actor [actor]="actorA()!" />
+          <div class="text-white lg:text-8xl sm:text-4xl"> ---> </div>
+          <app-card-actor [actor]="actorB()!" />
+        </div>
+        <div class="grid gap-2 justify-center m-4">
+          <button class="bg-gray-800 text-white cursor-pointer p-2 w-100"
+            (click)="changeActors()">
+            Cambiar actores
+          </button>
+          <button class="bg-gray-800 text-white cursor-pointer p-2 w-100"
+            (click)="gameStart()">
+            Comenzar juego
+          </button>
+        </div>
+      </section>
+    }
+  </main>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  padding-top: 2rem;
+}
+
+div {
+  display: grid;
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+img {
+  object-fit: cover;
+  width: 250px;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  color: rgb(183, 183, 183);
+}

@@ -1,0 +1,28 @@
+@if (actors().length > 0) {
+  <div class="list-card">
+    @for (item of actors(); track $index) {
+      <div class="content-card bg-gray-800" (click)="selectActor(item)">
+        <div class="content-profile">
+          @if (item.profile_path) {
+            <img [src]="item.profile_path" alt="profile_actor">
+          }@else {
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250" fill="#cccccc">
+              <rect width="200" height="250" fill="#f0f0f0"/>
+              <path d="M100 50 C125 50 140 65 140 90 C140 115 125 130 100 130 C75 130 60 115 60 90 C60 65 75 50 100 50 Z"/>
+              <path d="M40 250 C40 200 60 150 100 150 C140 150 160 200 160 250 Z"/>
+              <g fill="#a0a0a0" transform="translate(85 80) scale(0.3)">
+                <path d="M0 0 H48 V8 H0z M0 12 H48 V20 H0z M0 24 H48 V32 H0z"/>
+                <path d="M0 0 L10 -10 H58 L48 0z"/>
+              </g>
+            </svg>
+          }
+        </div>
+        <div class="title-name">
+          {{ item.name }}
+        </div>
+      </div>
+    }@empty {
+      No hay actores
+    }
+  </div>
+}

@@ -10,7 +10,7 @@ export class ApiService {
 
   private http = inject( HttpClient );
 
-  private readonly baseUrl = environment;
+  private readonly baseUrl = environment.api_url;
 
   get<T>( url: string, params?: HttpParams ): Observable<T> {
     return this.http.get<T>(`${this.baseUrl}/${url}`, {

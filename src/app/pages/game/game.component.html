@@ -1,1 +1,104 @@
-<p>game works!</p>,
+@if (!connection()) {
+  <div class="p-6 flex justify-center items-center" style="height: 100vh;">
+    <div class="text-4xl text-white animate-pulse">
+      Comprobando conexion de actores...
+    </div>
+  </div>
+
+}@else {
+  <main class="min-h-full mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="text-white">
+      <h1 class="text-4xl">
+        Buscar Actores para conectarlos
+      </h1>
+      <div class="text-gray-500 text-2xl">
+        Intentos: {{ intentos() }} / {{ maxIntentos() }}
+      </div>
+    </div>
+    <hr class="mt-4 text-white">
+    <section class="flex w-full gap-4 mt-8 flex-wrap items-end">
+      <div class="flex-1">
+        <label for="first-actor" class="text-white">Buscar actor de conexion</label>
+        <app-search (onSearch)="searchActor($event)" [disabled]="win()"/>
+      </div>
+      <div>
+        <button class="bg-gray-500 text-white cursor-pointer p-2 w-100" (click)="comprobarConexionDirecta()"
+          [disabled]="win()">
+          Conexion directa
+        </button>
+      </div>
+    </section>
+    @if (!win() && !loose()) {
+      <section>
+        <div class="flex gap-2 flex-wrap justify-between items-center">
+          <app-card-actor [actor]="arrayActors().at(-1)!" />
+          <div class="text-white lg:text-8xl sm:text-4xl"> ---> </div>
+          <app-card-actor [actor]="actorB()!" />
+        </div>
+      </section>
+    }@else {
+      @if(win()) {
+        @for (actor_movie of arrayMoviesActors(); track $index) {
+          <div class="flex flex-wrap gap-6 my-6 items-center justify-between">
+            <div class="text-white flex flex-col items-center">
+              <img width="100" height="100" [src]="getUrl(actor_movie.actual.profile_path)" alt="profile">
+              {{ actor_movie.actual.name }}
+            </div>
+            <b class="text-white text-2xl">---></b>
+            <div class="text-white flex flex-col items-center">
+              <img width="100" height="100" [src]="getUrl(actor_movie.movie.poster_path)" alt="poster">
+              {{ actor_movie.movie.title }}
+            </div>
+            <b class="text-white text-2xl">---></b>
+            <div class="text-white flex flex-col items-center">
+              <img width="100" height="100" [src]="getUrl(actor_movie.destino.profile_path)" alt="profile">
+              {{ actor_movie.destino.name }}
+            </div>
+          </div>
+        }
+      }
+      @if (hayMejorRuta()) {
+        <hr class="text-white my-6">
+        @if (win()) {
+          <h2 class="text-white text-4xl">El sistema encontro una mejor ruta</h2>
+        }@else {
+          <h2 class="text-white text-4xl">Esta era la mejor ruta</h2>
+        }
+        @for (actor_movie of betterRuta(); track $index) {
+          <div class="flex flex-wrap gap-6 my-6 items-center justify-between">
+            <div class="text-white flex flex-col items-center">
+              <img width="100" height="100" [src]="getUrl(actor_movie.actual.profile_path!)" alt="profile">
+              {{ actor_movie.actual.name }}
+            </div>
+            <b class="text-white text-2xl">---></b>
+            <div class="text-white flex flex-col items-center">
+              <img width="100" height="100" [src]="getUrl(actor_movie.movie.poster_path)" alt="poster">
+              {{ actor_movie.movie.movie_title }}
+            </div>
+            <b class="text-white text-2xl">---></b>
+            <div class="text-white flex flex-col items-center">
+              <img width="100" height="100" [src]="getUrl(actor_movie.destino.profile_path!)" alt="profile">
+              {{ actor_movie.destino.name }}
+            </div>
+          </div>
+        }
+      }
+    }
+
+    @if (listActors()) {
+      <app-list-actors [actors]="listActors()"
+      (onSelectActor)="selectActor($event)" />
+    }
+
+    @if (this.win() || this.loose()) {
+      <section>
+        <hr class="text-white my-4">
+        <button class="bg-gray-500 text-white cursor-pointer p-2 w-100" (click)="backGame()">
+          Volver a jugar
+        </button>
+      </section>
+    }
+  </main>
+}
+
+<app-footer></app-footer>

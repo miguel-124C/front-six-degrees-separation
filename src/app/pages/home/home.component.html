@@ -28,8 +28,12 @@
       </div>
     </section>
 
-    <app-list-actors [actors]="listActors()"
+    @if (listActors()) {
+      <app-list-actors [actors]="listActors()"
       (onSelectActor)="selectActor($event, turnActor)" />
+    }@else {
+      <div class="h-100"></div>
+    }
 
     @if (actorsSelected()) {
       <section>

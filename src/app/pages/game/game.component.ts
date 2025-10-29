@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { GameService, TmdbService } from '../../core';
 import { Router } from '@angular/router';
-import { CardActorComponent, SearchComponent, ListActorsComponent, FooterComponent } from "../../shared/components";
+import { CardActorComponent, SearchComponent, ListActorsComponent } from "../../shared/components";
 import { Actors, BetterRouts } from '../../core/interfaces';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CardActorComponent, SearchComponent, ListActorsComponent, FooterComponent],
+  imports: [CardActorComponent, SearchComponent, ListActorsComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

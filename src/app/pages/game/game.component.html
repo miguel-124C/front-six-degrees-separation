@@ -39,7 +39,7 @@
     }@else {
       @if(win()) {
         @for (actor_movie of arrayMoviesActors(); track $index) {
-          <div class="flex flex-wrap gap-6 my-6 items-center justify-between">
+          <div class="grid grid-cols-5 my-6 items-center justify-items-center">
             <div class="text-white flex flex-col items-center">
               <img width="100" height="100" [src]="getUrl(actor_movie.actual.profile_path)" alt="profile">
               {{ actor_movie.actual.name }}
@@ -65,7 +65,7 @@
           <h2 class="text-white text-4xl">Esta era la mejor ruta</h2>
         }
         @for (actor_movie of betterRuta(); track $index) {
-          <div class="flex flex-wrap gap-6 my-6 items-center justify-between">
+          <div class="grid grid-cols-5 my-6 items-center justify-items-center">
             <div class="text-white flex flex-col items-center">
               <img width="100" height="100" [src]="getUrl(actor_movie.actual.profile_path!)" alt="profile">
               {{ actor_movie.actual.name }}
@@ -100,5 +100,3 @@
     }
   </main>
 }
-
-<app-footer></app-footer>

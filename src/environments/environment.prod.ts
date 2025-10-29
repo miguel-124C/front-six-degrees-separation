@@ -3,6 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  api_url: 'http://url_de_prod',
+  production: true,
+  api_url: 'https://back-six-degrees-separation.onrender.com',
 };

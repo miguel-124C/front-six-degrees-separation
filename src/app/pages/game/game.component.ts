@@ -36,19 +36,20 @@ export class GameComponent {
   public arrayMoviesActors = signal<any[]>([]);
 
   ngOnInit(): void {
+    const actor0 = this.gameService.actor0();
     const actorA = this.gameService.actorA();
     const actorB = this.gameService.actorB();
-    if (!actorA || !actorB) {
+    if (!actorA || !actorB || !actor0) {
       this.router.navigateByUrl('/');
       return;
     }
 
-    this.verifyConexionActors( actorA!.id, actorB!.id );
+    this.verifyConexionActors( actor0.id, actorA!.id, actorB!.id );
   }
 
-  public verifyConexionActors(idA: number, idB: number) {
-    this.gameService.verifyConexionAB( idA, idB ).subscribe({
-      next: ({connection, ruta}) => {
+  public verifyConexionActors(id0: number, idA: number, idB: number) {
+    this.gameService.verifyConexionAB( id0, idA, idB ).subscribe({
+      next: ({connection, ruta, ruta2}) => {
         this.connection.set(connection);
         if (!connection) {
           alert('No se encontro conexion entre estos 2 actores');
@@ -57,7 +58,13 @@ export class GameComponent {
           }, 1000);
         }
         
+        console.log(ruta);
+        console.log(ruta2);
+        
+        ruta.push([...ruta2])
         this.betterRuta.set(ruta)
+        console.log(this.betterRuta());
+        
         this.arrayActors.update((actors)=> {
           return [
             ...actors,

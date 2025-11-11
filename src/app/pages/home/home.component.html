@@ -20,12 +20,16 @@
     <h2 class="mb-8 text-2xl font-bold tracking-tight text-white">Selecciona los actores que quieras conectar</h2>
     <section class="grid grid-cols-2 w-full gap-4">
       <div>
-        <label for="first-actor" class="text-white">Actor A</label>
-        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == 'B' || actorsSelected()" />
+        <label for="first-actor" class="text-white">Origen</label>
+        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == '0' && !!actor0()" />
       </div>
       <div>
-        <label for="second-actor" class="text-white">Actor B</label>
-        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == 'A' || actorsSelected()" />
+        <label for="first-actor" class="text-white">Inicio</label>
+        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == 'A' && !!actorA()" />
+      </div>
+      <div>
+        <label for="second-actor" class="text-white">Final</label>
+        <app-search (onSearch)="searchActor($event)" [disabled]="turnActor == 'B' && !!actorB()" />
       </div>
     </section>
 
@@ -39,6 +43,8 @@
     @if (actorsSelected()) {
       <section>
         <div class="flex gap-2 flex-wrap justify-between items-center">
+          <app-card-actor [actor]="actor0()!" />
+          <div class="text-white lg:text-8xl sm:text-4xl"> ---> </div>
           <app-card-actor [actor]="actorA()!" />
           <div class="text-white lg:text-8xl sm:text-4xl"> ---> </div>
           <app-card-actor [actor]="actorB()!" />

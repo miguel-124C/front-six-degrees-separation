@@ -11,12 +11,13 @@ export class GameService {
   private readonly baseUrl = 'game'
   private apiService = inject( ApiService );
 
+  actor0 = signal<Actors | undefined>(undefined);
   actorA = signal<Actors | undefined>(undefined);
   actorB = signal<Actors | undefined>(undefined);
 
-  public verifyConexionAB( idA: number, idB: number ) {
-    return this.apiService.get<{connection: boolean, ruta: any}>(`${this.baseUrl}/verify/conection`, new HttpParams({
-      fromString: `idActorA=${idA}&idActorB=${idB}`
+  public verifyConexionAB( id0: number, idA: number, idB: number ) {
+    return this.apiService.get<{connection: boolean, ruta: any, ruta2: any}>(`${this.baseUrl}/verify/conection`, new HttpParams({
+      fromString: `idActor0=${id0}&idActorA=${idA}&idActorB=${idB}`
     }));
   }
 

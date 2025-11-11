@@ -24,17 +24,19 @@ export class HomeComponent {
   private gameService = inject( GameService );
   private router = inject( Router );
 
+  public actor0 = signal<Actors | undefined>(undefined);
   public actorA = signal<Actors | undefined>(undefined);
   public actorB = signal<Actors | undefined>(undefined);
-  public turnActor: 'A' | 'B' = 'A';
+  public turnActor: '0' | 'A' | 'B' = '0';
 
   private readonly urlImage = "https://image.tmdb.org/t/p/original"
-  public actorsSelected = computed(()=> !!this.actorA() && !!this.actorB());
+  public actorsSelected = computed(()=> !!this.actorA() && !!this.actorB() && !!this.actor0());
 
   public listActors = signal<Actors[]>([]);
 
   constructor(){
     effect(()=> {
+      this.gameService.actor0.set(this.actor0());
       this.gameService.actorA.set(this.actorA());
       this.gameService.actorB.set(this.actorB());
     });
@@ -46,6 +48,8 @@ export class HomeComponent {
 
     this.tmdbService.searchActor(name).subscribe({
       next: data => {
+        console.log(data);
+        
         const actors = data.map( d => {
           d.profile_path = `${this.urlImage}${d.profile_path}` 
           return d
@@ -57,8 +61,11 @@ export class HomeComponent {
     })
   }
 
-  selectActor( actor: Actors, aOrB: 'A' | 'B' ) {
-    if (aOrB === 'A') {
+  selectActor( actor: Actors, aOrB: '0' | 'A' | 'B' ) {
+    if (aOrB === '0') {
+      this.turnActor = 'A';
+      this.actor0.set(actor);
+    }else if (aOrB === 'A') {
       this.turnActor = 'B';
       this.actorA.set(actor);
     }else if (aOrB === 'B') {

@@ -58,12 +58,10 @@ export class GameComponent {
           }, 1000);
         }
         
-        console.log(ruta);
-        console.log(ruta2);
-        
-        ruta.push([...ruta2])
-        this.betterRuta.set(ruta)
-        console.log(this.betterRuta());
+        ruta.push(...ruta2)
+        this.betterRuta.set(ruta);
+        this.gameService.betterRuta.set( this.betterRuta() );
+        this.router.navigateByUrl('/examen');
         
         this.arrayActors.update((actors)=> {
           return [

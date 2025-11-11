@@ -10,4 +10,7 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Preview de lo que se pidio en el examen
+![Seleccion de actores](public/select.png)
+
+![Mejor ruta](public/mejor_ruta.png)

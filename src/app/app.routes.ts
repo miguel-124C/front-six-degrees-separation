@@ -8,6 +8,9 @@ export const routes: Routes = [
     path: 'game',
     loadComponent: ()=> import('./pages/game/game.component').then( c => c.GameComponent)
   },{
+    path: 'examen',
+    loadComponent: ()=> import('./pages/examen/examen').then( c => c.Examen)
+  },{
     path: 'login',
     loadComponent: ()=> import('./pages/login/login.component').then( c => c.LoginComponent)
   }, {

@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Actors } from '../interfaces';
+import { Actors, BetterRouts } from '../interfaces';
 import { ApiService } from './api.service';
 import { HttpParams } from '@angular/common/http';
 
@@ -14,6 +14,7 @@ export class GameService {
   actor0 = signal<Actors | undefined>(undefined);
   actorA = signal<Actors | undefined>(undefined);
   actorB = signal<Actors | undefined>(undefined);
+  betterRuta = signal<BetterRouts[]>([]);
 
   public verifyConexionAB( id0: number, idA: number, idB: number ) {
     return this.apiService.get<{connection: boolean, ruta: any, ruta2: any}>(`${this.baseUrl}/verify/conection`, new HttpParams({

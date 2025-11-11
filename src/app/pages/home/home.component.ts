@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     SearchComponent,
-    FooterComponent,
     ListActorsComponent,
     CardActorComponent
 ],

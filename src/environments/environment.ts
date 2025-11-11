@@ -4,5 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://back-six-degrees-separation.onrender.com',
+  // URL back with debugger
+  // http://127.0.0.1:5000
+  api_url: 'http://127.0.0.1:8000',
 };
